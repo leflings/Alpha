@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   end
 
   def list
-    @title = "List of movies"
+    @title = "List of movies
   end
 
 end
