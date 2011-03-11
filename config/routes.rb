@@ -1,4 +1,8 @@
 Alpha::Application.routes.draw do
+  get "movies/show"
+
+  get "movies/list"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
