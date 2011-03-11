@@ -4,3 +4,15 @@
   Age: <%= age(@person.birthdate) %>
 </p>
 <p>IMDb: <%= link_to imdb_link(@person.imdb_id), imdb_link(@person.imdb_id) %></p>
+  <ul>
+    Acting roles
+    <% @person.movies.acted.order("year DESC").each do |m| %>
+      <li><%= link_to m.name, movie_path(m.id) %> (<%= m.year %>)</li>
+    <% end %>
+  </ul>
+  <ul>
+    Directing roles:
+    <% @person.movies.directed.order("year DESC").each do |movie| %>
+      <li><%= link_to movie.name, movie_path(movie.id) %> (<%= movie.year %>)</li>
+    <% end unless blank? %>
+  </ul>

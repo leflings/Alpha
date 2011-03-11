@@ -4,7 +4,7 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
-    99.times do |n|
+    50.times do |n|
       name  = Faker::Company.name
       year = 1900+rand(111)
       rating = 1+rand(10)
@@ -23,6 +23,14 @@ namespace :db do
       Person.create!(:name => name,
                      :birthdate => birthdate,
                      :imdb_id => imdb_id)
+    end
+200.times do |n|
+      person = 1+rand(50)
+      movie = 1+rand(50)
+      role = (1 == rand(2) ? "actor" : "director")
+      Relationship.create!(:person_id => person,
+                           :movie_id => movie,
+                           :role => role)
     end
   end
 end

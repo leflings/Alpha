@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110311172624) do
+ActiveRecord::Schema.define(:version => 20110311193906) do
 
   create_table "movies", :force => true do |t|
     t.string   "name"
@@ -29,5 +29,17 @@ ActiveRecord::Schema.define(:version => 20110311172624) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "relationships", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "movie_id"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["movie_id"], :name => "index_relationships_on_movie_id"
+  add_index "relationships", ["person_id"], :name => "index_relationships_on_person_id"
+  add_index "relationships", ["role"], :name => "index_relationships_on_role"
 
 end
