@@ -1,4 +1,0 @@
-<li>
-  <b><%= movie.name %></b> (<%= movie.year %>)</b>
-  <a href="http://www.imdb.com/title/tt<%= movie.imdb_id %>">IMDb</a>
-</li>

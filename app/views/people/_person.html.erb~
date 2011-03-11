@@ -1,4 +1,0 @@
-<li>
-  <b><%= link_to person.name, person_path(person.id) %></b>
-  <a href="http://www.imdb.com/name/nm<%= person.imdb_id %>">IMDb</a>
-</li>

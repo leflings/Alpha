@@ -1,5 +1,0 @@
-<h3>
-  <%= @movie.name %> (<%= @movie.year %>)
-</h3>
-<p>Rating: <%= raw(rating_stars(@movie.rating)) %></p>
-<%= link_to imdb_link(@movie.imdb_id), imdb_link(@movie.imdb_id) %>
