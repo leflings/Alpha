@@ -1,1 +1,8 @@
-This here shows a specific movie, yo
+<h3>
+  <%= @movie.name %> (<%= @movie.year %>)
+</h3>
+<p>Rating: <%= raw(rating_stars(@movie.rating)) %></p>
+<% if @movie.watched? %>
+<p>You have watched this movie</p>
+<% end %>
+<%= link_to imdb_link(@movie.imdb_id), imdb_link(@movie.imdb_id) %>

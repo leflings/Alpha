@@ -1,1 +1,24 @@
-This is the "aside" part, hooray
+<% if !@aside.nil? %>
+  <% if @aside[:type] == "movie" %>
+    <%= @aside[:content].name %>
+  <% end %>
+
+  <% if @aside[:type] == "movies" %>
+    Top 10 movies:
+    <ul>
+      <% @aside[:content].each do |movie| %>
+        <li><%= link_to movie.name, movie_path(movie.id) %> (<%= movie.rating %>/10)</li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @aside[:type] == "people" %>
+    Top 10 oldest:
+    <ul>
+      <% @aside[:content].each do |person| %>
+        <li><%= link_to person.name, person_path(person.id) %>
+          (<%= age(person.birthdate) %>)</li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

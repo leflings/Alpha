@@ -1,0 +1,4 @@
+<li>
+  <b><%= link_to movie.name, movie_path(movie.id) %></b> (<%= movie.year %>)
+  <a href="http://www.imdb.com/title/tt<%= movie.imdb_id %>">IMDb</a>
+</li>

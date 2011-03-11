@@ -13,6 +13,6 @@ module MoviesHelper
   end
 
   def imdb_link(id)
-    "http://www.imdb.com/title/tt#{id}"
+    "http://www.imdb.com/title/tt{#id}"
   end
 end

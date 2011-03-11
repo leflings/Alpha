@@ -1,0 +1,14 @@
+<% if !@aside.nil? %>
+  <% if @aside[:type] == "movie" %>
+    <%= @aside[:content].name %>
+  <% end %>
+
+  <% if @aside[:type] == "movies" %>
+    Top 10 movies:
+    <ul>
+      <% @aside[:content].each do |movie| %>
+        <li><%= link_to movie.name, movie_path(movie.id) %> (<%= movie.rating %>/10)</li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

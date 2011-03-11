@@ -12,10 +12,3 @@ Movies model:
     rating
     watched
     imdb_id
-
-Persons model:
-  name
-  birthdate
-  imdb_id
-
-

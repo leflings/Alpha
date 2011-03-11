@@ -1,1 +1,1 @@
-<p>This is the top navigation, hooray</p>
+<%= link_to "Index", movies_path %> | inactive

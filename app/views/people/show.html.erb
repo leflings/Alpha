@@ -1,0 +1,6 @@
+<h3><%= @person.name %></h3>
+<p>
+  Born: <%= @person.birthdate.strftime("%B %d, %Y") %><br />
+  Age: <%= age(@person.birthdate) %>
+</p>
+<p>IMDb: <%= link_to imdb_link(@person.imdb_id), imdb_link(@person.imdb_id) %></p>

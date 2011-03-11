@@ -1,2 +1,1 @@
-<h1>Movies#list</h1>
-<p>Find me in app/views/movies/list.html.erb</p>
+<%= render @movies =>
