@@ -1,2 +1,5 @@
 %li
+  - if signed_in? 
+    -if current_user.admin?
+      = link_to("delete", user, :method => :delete, :class => "button danger", :confirm => "You sure?", :title => "Delete #{user.name}")
   = link_to user.name, user

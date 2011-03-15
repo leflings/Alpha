@@ -1,0 +1,10 @@
+%h1 Edit user
+= simple_form_for(@user) do |f|
+  = f.input :name, :hint => "Your full name or screen name"
+  = f.input :email, :hint => "This will serve as your login"
+  = f.input :password, :hint => "Must be atleast 6 characters long"
+  = f.input :password_confirmation, :label => "Confirm", :hint => "Passwords must match"
+  = f.button :submit, :class => "icon approve"
+%div
+  = gravatar_for @user
+  = link_to "change", "http://gravatar.com/emails"
