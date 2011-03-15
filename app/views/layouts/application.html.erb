@@ -12,7 +12,6 @@
   <header>
     <hgroup>
       <h1>Alpha</h1>
-      <h2><%= @title %></h2>
     </hgroup>
     <nav>
       <%= render 'layouts/navigation' %>
@@ -34,6 +33,7 @@
 
   <footer>
     <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
   </footer>
 
 </div>
