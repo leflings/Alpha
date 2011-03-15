@@ -7,4 +7,7 @@ class PagesController < ApplicationController
     @title = "Contact"
   end
 
+  def home
+    @title = "Front page"
+  end
 end

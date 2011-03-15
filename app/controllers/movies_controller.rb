@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   def show
-    @title = "Specific movie"
     @movie = Movie.find_by_id(params[:id])
+    @title = @movie.name
     @aside = { :type => "movie", :content => @movie }
   end
 
