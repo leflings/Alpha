@@ -1,6 +1,8 @@
 Alpha::Application.routes.draw do
 
-  get "imdb/show"
+  match '/about', :to => "pages#about"
+  match '/contact', :to => "pages#contact"
+  match '/signup', :to => "users#new"
 
   resources :users
   resources :people

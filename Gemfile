@@ -6,6 +6,7 @@ gem 'gravatar_image_tag', '1.0.0.pre2'
 gem 'will_paginate', '3.0.pre2'
 gem 'faker', '0.3.1'
 gem 'haml'
+gem 'simple_form'
 
 group :development do
   gem 'rspec-rails', '2.5.0'

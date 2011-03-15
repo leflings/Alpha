@@ -1,3 +1,7 @@
-.button-group
-  = link_to "Movies", movies_path, :class => "button"
-  = link_to "People", people_path, :class => "button"
+.actions.button-container
+  .button-group
+    = link_to "Movies", movies_path, :class => "button"
+    = link_to "People", people_path, :class => "button"
+    = link_to "Users", users_path, :class => "button"
+
+  = link_to "Sign up", signup_path, :class => "button"
