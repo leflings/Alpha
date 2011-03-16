@@ -25,7 +25,12 @@
       <div id="nav">
         <%= render 'layouts/navigation' %>
         
-        <p id="presentation">Hi, my name is Flemming.</p> 
+        <p id="presentation">
+          <% if signed_in? %>
+            Signed in as:<br />
+            <%= link_to current_user.name, user_path(current_user) %>
+          <% end %>
+        </p> 
         
       </div>
     </div>
@@ -33,7 +38,6 @@
   <div class="container_12">
     <div class="grid_12" id="footer">
       <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
     </div>
   </div>
 

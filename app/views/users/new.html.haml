@@ -4,4 +4,7 @@
   = f.input :email, :hint => "This will serve as your login"
   = f.input :password, :hint => "Must be atleast 6 characters long"
   = f.input :password_confirmation, :label => "Confirm", :hint => "Passwords must match"
+  = gotcha
+  - if gotcha_error
+    = flash.now[:error] = gotcha_error
   = f.button :submit, :class => "icon approve"

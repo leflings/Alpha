@@ -7,6 +7,8 @@ Alpha::Application.routes.draw do
 
   root :to => "pages#home"
 
+  match 'users/:id/promote', :as => "user_promote", :to => "users#promote"
+  match 'users/:id/demote', :as => "user_demote", :to => "users#demote"
   match '/about', :to => "pages#about"
   match '/contact', :to => "pages#contact"
   match '/signup', :to => "users#new"

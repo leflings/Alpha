@@ -1,6 +1,10 @@
 %h1 Welcome to Alpha
-%p
-  You can now either
-  = link_to "sign in", signin_path
-  or
-  = link_to "register", signup_path
+- if !signed_in?
+  %p
+    You can now either
+    = link_to "sign in", signin_path
+    or
+    = link_to "register", signup_path
+- else
+  %p
+    You are already logged in and ready to enjoy all the site has to offer

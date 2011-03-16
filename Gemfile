@@ -7,6 +7,7 @@ gem 'will_paginate', '3.0.pre2'
 gem 'faker', '0.3.1'
 gem 'haml'
 gem 'simple_form'
+gem 'gotcha'
 
 group :development do
   gem 'rspec-rails', '2.5.0'

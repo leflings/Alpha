@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
-  before_filter :admin_user, :only => :destroy
-  before_filter :oneself, :only => :destroy 
+  before_filter :admin_user, :only => [:destroy, :promote, :demote]
+  before_filter :oneself, :only => [:destroy, :demote]
   before_filter :is_registered, :only => [:new, :create]
 
   def new
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
+    if gotcha_valid? && @user.save
       sign_in @user
       flash[:success] = "Welcome to Alpha! You are now signed in"
       redirect_to @user
@@ -35,9 +35,24 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  def promote
+    @user = User.find(params[:id])
+    @user.update_attribute(:admin, true)
+    flash[:success] = "Promoted to admin"
+    redirect_to :back
+  end
+
+  def demote
+    @user = User.find(params[:id])
+    @user.update_attribute(:admin, false)
+    flash[:success] = "User demoted"
+    redirect_to :back
+  end
 
   def index
-    @users = User.all
+    @users = User.where(['admin = ?', false])
+    @admins = User.where(['admin = ?', true])
     @title = "All users"
   end
 
@@ -64,11 +79,11 @@ class UsersController < ApplicationController
     end
 
     def admin_user
-      redirect_to(root_path) unless current_user.admin?
+      redirect_to(root_path) unless signed_in? && current_user.admin?
     end
 
     def oneself
-      redirect_to(users_path) && flash[:notice] = "Cant delete yourself" if User.find(params[:id]).id == current_user.id
+      redirect_to(:back) && flash[:notice] = "Cant modify yourself" if User.find(params[:id]).id == current_user.id
     end
 
     def is_registered

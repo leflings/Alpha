@@ -1,5 +1,15 @@
+- if signed_in? && current_user.admin?
+  .button-group
+    = link_to("Delete", @user, :method => :delete, :class => "button danger icon remove", :confirm => "You sure?", :title => "Delete #{@user.name}")
+    - if @user.admin?
+      = link_to("Demote", user_demote_path(@user), :method => :put, :class => "button icon user")
+    - else
+      = link_to("Promote", user_promote_path(@user), :method => :put, :class => "button icon user")
+      
 %h1
   = gravatar_for @user
   = @user.name
 %p
+  - if @user.admin?
+    %p User is admin
   = @user.email
