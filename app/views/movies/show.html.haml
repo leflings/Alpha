@@ -1,0 +1,21 @@
+- if signed_in? && current_user.admin?
+  .button-group
+    = link_to "Edit", edit_movie_path(@movie), :class => "button icon edit"
+    = link_to "Delete", @movie, :method => :delete, :class => "button danger icon trash", :confirm => "You sure?", :title => "Delete movie"
+%h3
+  = @movie.name + " (" + @movie.year.to_s + ")"
+%p
+  = raw(rating_stars(@movie.rating))
+- if @movie.watched?
+  %p You have watched this movie
+= link_to imdb_link(@movie.imdb_id, "movie"), imdb_link(@movie.imdb_id, "movie")
+%ul
+  Directing:
+  - @movie.people.directing.each do |p|
+    %li
+      = link_to p.name, person_path(p.id)
+%ul
+  Acting:
+  - @movie.people.acting.each do |p|
+    %li
+      = link_to p.name, person_path(p.id)

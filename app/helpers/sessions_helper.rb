@@ -29,6 +29,18 @@ module SessionsHelper
     redirect_to signin_path, :notice => "Please sign in to access this page"
   end
 
+  def deny_authority
+    redirect_to root_path, :notice => "Insufficient authority"
+  end
+
+  def authenticate
+    deny_access unless signed_in?
+  end
+
+  def have_to_be_admin
+    deny_authority unless signed_in? && current_user.admin?
+  end
+    
   def redirect_back_or(default)
     redirect_to(session[:return_to] || default)
     clear_return_to

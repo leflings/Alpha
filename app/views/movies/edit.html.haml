@@ -1,0 +1,8 @@
+%h1 Edit movie
+= simple_form_for(@movie) do |f|
+  = f.input :name
+  = f.input :year, :collection => 1900..2011
+  = f.input :rating, :collection => 1..10, :as => :radio
+  = f.input :watched
+  = f.input :imdb_id, :label => "IMDb ID"
+  = f.button :submit

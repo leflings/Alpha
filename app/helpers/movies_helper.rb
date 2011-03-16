@@ -12,7 +12,4 @@ module MoviesHelper
     return stars
   end
 
-  def imdb_link(id)
-    "http://www.imdb.com/title/tt#{id}"
-  end
 end

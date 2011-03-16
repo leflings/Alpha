@@ -1,0 +1,23 @@
+- if signed_in? && current_user.admin?
+  .button-group
+    = link_to "Edit", edit_person_path(@person), :class => "button icon edit"
+    = link_to "Delete", @person, :method => :delete, :class => "button danger icon trash", :confirm => "You sure?", :title => "Delete person"
+%h3
+  = @person.name
+%p
+  = "Born: " + @person.birthdate.strftime("%B %d, %Y")
+%p
+  = "Age: " + age(@person.birthdate).to_s
+%p
+  IMDb:
+  = link_to imdb_link(@person.imdb_id, "person"), imdb_link(@person.imdb_id, "person")
+%ul
+  Acting roles:
+  - @person.movies.acted.order("year DESC").each do |m|
+    %li
+      = link_to(m.name, movie_path(m.id)) + " (" + m.year.to_s + ")"
+%ul
+  Directing jobs:
+  - @person.movies.directed.order("year DESC").each do |m|
+    %li
+      = link_to(m.name, movie_path(m.id)) + " (" + m.year.to_s + ")"
