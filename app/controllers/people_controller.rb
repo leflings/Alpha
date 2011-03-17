@@ -1,5 +1,20 @@
 class PeopleController < ApplicationController
-  before_filter :have_to_be_admin, :only => [:edit, :update, :destroy]
+  before_filter :have_to_be_admin, :only => [:new, :create, :edit, :update, :destroy]
+
+  def new
+    @title = "New person"
+    @person = Person.new
+  end
+
+  def create
+    @person = Person.new(params[:person])
+    if @person.save
+      flash[:success] = "Person created"
+      redirect_to @person
+    else
+      render 'new'
+    end
+  end
 
   def index
     @people = Person.all

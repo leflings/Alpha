@@ -1,0 +1,7 @@
+= link_to "Add new person", new_person_path, :class =>  "button icon add"
+%h3 #{@title}
+= simple_form_for @rel do |f|
+  = f.input :person_id, :label => "Name", :collection => Person.all
+  = f.input :movie_id , :as => :hidden, :input_html => { :value => @movie.id }
+  = f.input :role, :collection => ["actor", "director"], :include_blank => false
+  = f.button :submit, :class => "icon approve"

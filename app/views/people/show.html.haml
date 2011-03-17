@@ -11,13 +11,39 @@
 %p
   IMDb:
   = link_to imdb_link(@person.imdb_id, "person"), imdb_link(@person.imdb_id, "person")
-%ul
-  Acting roles:
-  - @person.movies.acted.order("year DESC").each do |m|
-    %li
-      = link_to(m.name, movie_path(m.id)) + " (" + m.year.to_s + ")"
-%ul
-  Directing jobs:
-  - @person.movies.directed.order("year DESC").each do |m|
-    %li
-      = link_to(m.name, movie_path(m.id)) + " (" + m.year.to_s + ")"
+- unless @person.movies.acted.blank?
+  %table
+    %caption Acting roles
+    %thead
+      %tr
+        %th Movie
+        %th Rating
+        %th Year
+        - if signed_in? && current_user.admin?
+          %th Action
+    %tbody
+      - Relationship.where(['role = ?', "actor"]).find_all_by_person_id(@person.id).each do |r|
+        %tr
+          %td #{link_to(r.movie.name, movie_path(r.movie.id))}
+          %td #{r.movie.rating}/10
+          %td #{r.movie.year}
+          -if signed_in? && current_user.admin?
+            %td #{link_to("Delete", r, :method => :delete, :class => "button pill danger icon trash", :confirm => "You sure?")}
+- unless @person.movies.directed.blank?
+  %table
+    %caption Directing roles
+    %thead
+      %tr
+        %th Movie
+        %th Rating
+        %th Year
+        - if signed_in? && current_user.admin?
+          %th Action
+    %tbody
+      - Relationship.where(['role = ?', "director"]).find_all_by_person_id(@person.id).each do |r|
+        %tr
+          %td #{link_to(r.movie.name, movie_path(r.movie.id))}
+          %td #{r.movie.rating}/10
+          %td #{r.movie.year}
+          -if signed_in? && current_user.admin?
+            %td #{link_to("Delete", r, :method => :delete, :class => "button pill danger icon trash", :confirm => "You sure?")}

@@ -1,8 +1,25 @@
 class MoviesController < ApplicationController
-  before_filter :have_to_be_admin, :only => [:edit, :update, :destroy]
+  before_filter :have_to_be_admin, :only => [:new, :create, :edit, :update, :destroy]
   
+  def new
+    @title = "New movie"
+    @movie = Movie.new
+  end
+
+  def create
+    @movie = Movie.new(params[:movie])
+    if @movie.save
+      flash[:success] = "Movie created"
+      redirect_to @movie
+    else
+      render 'new'
+    end
+  end
+
   def show
     @movie = Movie.find_by_id(params[:id])
+    @actors = Relationship.actor.find_all_by_movie_id(params[:id])
+    @directors = Relationship.director.find_all_by_movie_id(params[:id])
     @title = @movie.name
   end
 
@@ -31,6 +48,12 @@ class MoviesController < ApplicationController
     Movie.find(params[:id]).destroy
     flash[:success] = "Movie deleted."
     redirect_to movies_path
+  end
+
+  def add_relationship
+    @rel = Relationship.new
+    @movie = Movie.find_by_id(params[:id])
+    @title = "Add person to #{@movie.name}"
   end
 
 end

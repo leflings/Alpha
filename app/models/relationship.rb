@@ -3,4 +3,10 @@ class Relationship < ActiveRecord::Base
 
   belongs_to :person
   belongs_to :movie
+
+  scope :actor, where(:role => "actor")
+  scope :director, where(:role => "director")
+
+  validates :movie_id, :presence => true
+  validates :person_id, :presence => true
 end

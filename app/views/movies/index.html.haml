@@ -1,0 +1,6 @@
+- if signed_in? && current_user.admin?
+  = link_to "Add movie", new_movie_path, :class => "button icon add"
+%h3 All movies
+%ul
+  = render @movies
+= will_paginate

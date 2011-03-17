@@ -2,6 +2,7 @@
   .button-group
     = link_to "Edit", edit_movie_path(@movie), :class => "button icon edit"
     = link_to "Delete", @movie, :method => :delete, :class => "button danger icon trash", :confirm => "You sure?", :title => "Delete movie"
+    = link_to "Add person", add_relationship_path(@movie), :class => "button icon add"
 %h3
   = @movie.name + " (" + @movie.year.to_s + ")"
 %p
@@ -9,13 +10,31 @@
 - if @movie.watched?
   %p You have watched this movie
 = link_to imdb_link(@movie.imdb_id, "movie"), imdb_link(@movie.imdb_id, "movie")
-%ul
-  Directing:
-  - @movie.people.directing.each do |p|
-    %li
-      = link_to p.name, person_path(p.id)
-%ul
-  Acting:
-  - @movie.people.acting.each do |p|
-    %li
-      = link_to p.name, person_path(p.id)
+- unless @directors.blank?
+  %table
+    %caption Directors
+    %thead
+      %tr
+        %th Name
+        - if signed_in? && current_user.admin?
+          %th Action
+    %tbody
+      - @directors.each do |r|
+        %tr
+          %td #{link_to(r.person.name, person_path(r.person_id))}
+          - if signed_in? && current_user.admin?
+            %td #{link_to("Delete", r, :method => :delete, :class => "button pull danger icon trash", :confirm => "You sure?")}
+- unless @actors.blank?
+  %table
+    %caption Actors
+    %thead
+      %tr
+        %th Name
+        - if signed_in? && current_user.admin?
+          %th Action
+    %tbody
+      - @actors.each do |r|
+        %tr
+          %td #{link_to(r.person.name, person_path(r.person_id))}
+          - if signed_in? && current_user.admin?
+            %td #{link_to("Delete", r, :method => :delete, :class => "button pull danger icon trash", :confirm => "You sure?")}
