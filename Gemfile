@@ -8,6 +8,7 @@ gem 'faker', '0.3.1'
 gem 'haml'
 gem 'simple_form'
 gem 'gotcha'
+gem 'jquery-rails'
 
 group :development do
   gem 'rspec-rails', '2.5.0'
