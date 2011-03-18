@@ -19,8 +19,7 @@ class SessionsController < ApplicationController
           render 'new'
         end
         format.js do
-          flash[:error] = "Invalid email/password combination. Try again"
-          redirect_from_facebox(signin_path)
+          render :js => "$('#error-box').addClass('error');$('#error-box').text('Invalid email/password combination. Try again.');"
         end
       else
         sign_in user

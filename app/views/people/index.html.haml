@@ -1,5 +1,5 @@
 - if signed_in? && current_user.admin?
-  = link_to "New person", new_person_path, :class => "button icon add"
+  = link_to "New person", new_person_path, :class => "button icon add", :remote => true
 %h3 All people
 %ul
   = render @people

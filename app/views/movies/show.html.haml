@@ -2,7 +2,7 @@
   .button-group
     = link_to "Edit", edit_movie_path(@movie), :class => "button icon edit"
     = link_to "Delete", @movie, :method => :delete, :class => "button danger icon trash", :confirm => "You sure?", :title => "Delete movie"
-    = link_to "Add person", add_relationship_path(@movie), :class => "button icon add"
+    = link_to "Add person", add_relationship_path(@movie), :class => "button icon add", :remote => true
 %h3
   = @movie.name + " (" + @movie.year.to_s + ")"
 %p

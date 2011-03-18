@@ -4,15 +4,20 @@ class PeopleController < ApplicationController
   def new
     @title = "New person"
     @person = Person.new
+    respond_to do |format|
+      format.js { render_to_facebox }
+    end
   end
 
   def create
     @person = Person.new(params[:person])
-    if @person.save
-      flash[:success] = "Person created"
-      redirect_to @person
-    else
-      render 'new'
+    respond_to do |format|
+      if @person.save
+        format.js do
+          flash[:success] = "Person created"
+          redirect_from_facebox @person
+        end
+      end
     end
   end
 

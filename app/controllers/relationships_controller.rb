@@ -10,9 +10,13 @@ class RelationshipsController < ApplicationController
 
   def create
     @relationship = Relationship.new(params[:relationship])
-    if @relationship.save
-      flash[:notice] = "Person successfully added to movie"
+    respond_to do |format|
+      if @relationship.save
+        format.js do
+          flash[:notice] = "Person successfully added to movie"
+          redirect_from_facebox movie_path(@relationship.movie)
+        end
+      end
     end
-    redirect_to movie_path(@relationship.movie)
   end
 end

@@ -4,15 +4,20 @@ class MoviesController < ApplicationController
   def new
     @title = "New movie"
     @movie = Movie.new
+    respond_to do |format|
+      format.js { render_to_facebox }
+    end
   end
 
   def create
     @movie = Movie.new(params[:movie])
-    if @movie.save
-      flash[:success] = "Movie created"
-      redirect_to @movie
-    else
-      render 'new'
+    respond_to do |format|
+      if @movie.save
+        format.js do
+          flash[:success] = "Movie created"
+          redirect_from_facebox @movie
+        end
+      end
     end
   end
 
@@ -54,6 +59,9 @@ class MoviesController < ApplicationController
     @rel = Relationship.new
     @movie = Movie.find_by_id(params[:id])
     @title = "Add person to #{@movie.name}"
+    respond_to do |format|
+      format.js { render_to_facebox }
+    end
   end
 
 end

@@ -1,0 +1,8 @@
+%h3 Add new movie
+= simple_form_for(:movie, :url => movies_path, :remote => true) do |f|
+  = f.input :name
+  = f.input :year, :collection => 1900..2011
+  = f.input :rating, :as => :radio, :collection => 1..10
+  = f.input :watched, :as => :boolean
+  = f.input :imdb_id
+  = f.button :submit
