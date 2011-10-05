@@ -1,5 +1,6 @@
 class MoviesController < ApplicationController
-  before_filter :have_to_be_admin, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :have_to_be_admin, :only => [:new, :create, :edit, :update,
+    :destroy]
   
   def new
     @title = "New movie"
