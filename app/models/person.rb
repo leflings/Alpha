@@ -15,8 +15,10 @@ class Person < ActiveRecord::Base
 
   has_many :relationships, :dependent => :destroy
   has_many :movies, :through => :relationships
-  has_many :movies_directed, :through => :relationships, :class_name => "Movie", :conditions => ['relationships.role = ?', "director" ], :source => :movie
-  has_many :movies_acted, :through => :relationships, :class_name => "Movie", :conditions => ['relationships.role = ?', "actor"], :source => :movie
+  has_many :movies_directed, :through => :relationships, :class_name => "Movie",
+    :conditions => ['relationships.role = ?', "director" ], :source => :movie
+  has_many :movies_acted, :through => :relationships, :class_name => "Movie",
+    :conditions => ['relationships.role = ?', "actor"], :source => :movie
   
   scope :acting, :conditions => ['relationships.role = ?', "actor"] 
   scope :directing, :conditions => ['relationships.role = ?', "director"] 
